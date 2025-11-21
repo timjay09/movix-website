@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movix - Modern Openbaar Vervoer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        :root {
+          --movix-primary: #3F51B5;
+          --movix-primary-light: #5C6BC0;
+          --movix-primary-dark: #303F9F;
+          --movix-accent: #FF6E40;
+          --movix-accent-dark: #F4511E;
+          --movix-white: #FFFFFF;
+          --movix-light-gray: #F5F5F5;
+          --movix-gray: #E0E0E0;
+          --movix-dark-gray: #424242;
+          --movix-black: #212121;
+          --movix-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+          --movix-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+          --movix-shadow-lg: 0 8px 24px rgba(63, 81, 181, 0.3);
+          --movix-radius-md: 8px;
+          --movix-radius-lg: 12px;
+          --movix-radius-xl: 16px;
+          --movix-space-sm: 8px;
+          --movix-space-md: 16px;
+          --movix-space-lg: 24px;
+          --movix-space-xl: 32px;
+          --movix-space-2xl: 48px;
+          --movix-space-3xl: 64px;
+          --movix-font-family: 'Quicksand', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+          --movix-transition-base: 250ms ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--movix-font-family);
+            background-color: var(--movix-light-gray);
+            color: var(--movix-dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--movix-white);
+            padding: var(--movix-space-lg);
+            box-shadow: var(--movix-shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--movix-primary);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: var(--movix-space-xl);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--movix-dark-gray);
+            font-weight: 500;
+            transition: color var(--movix-transition-base);
+        }
+
+        nav a:hover {
+            color: var(--movix-primary);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #3F51B5 0%, #5C6BC0 100%);
+            color: var(--movix-white);
+            padding: var(--movix-space-3xl) var(--movix-space-lg);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: var(--movix-space-md);
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: var(--movix-space-xl);
+            opacity: 0.95;
+        }
+
+        .hero .region {
+            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: var(--movix-space-xl);
+        }
+
+        .btn {
+            font-family: var(--movix-font-family);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: var(--movix-radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all var(--movix-transition-base);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-accent {
+            background-color: var(--movix-accent);
+            color: var(--movix-white);
+            box-shadow: var(--movix-shadow-sm);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--movix-accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--movix-shadow-md);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--movix-white);
+            border: 2px solid var(--movix-white);
+            margin-left: 16px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--movix-white);
+            color: var(--movix-primary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--movix-space-lg);
+        }
+
+        section {
+            padding: var(--movix-space-3xl) 0;
+        }
+
+        h2 {
+            font-size: 40px;
+            color: var(--movix-primary);
+            margin-bottom: var(--movix-space-lg);
+            text-align: center;
+        }
+
+        /* Stats */
+        .stats {
+            background: var(--movix-white);
+            padding: var(--movix-space-2xl);
+            border-radius: var(--movix-radius-lg);
+            box-shadow: var(--movix-shadow-md);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--movix-space-xl);
+            text-align: center;
+            margin-bottom: var(--movix-space-2xl);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--movix-primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--movix-dark-gray);
+            font-size: 16px;
+        }
+
+        /* Line Categories */
+        .line-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--movix-space-lg);
+            margin-bottom: var(--movix-space-2xl);
+        }
+
+        .category-card {
+            background: var(--movix-white);
+            border-radius: var(--movix-radius-lg);
+            padding: var(--movix-space-xl);
+            box-shadow: var(--movix-shadow-sm);
+            transition: all var(--movix-transition-base);
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            box-shadow: var(--movix-shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: var(--movix-space-md);
+        }
+
+        .category-card h3 {
+            color: var(--movix-primary);
+            font-size: 24px;
+            margin-bottom: var(--movix-space-sm);
+        }
+
+        .category-card p {
+            color: var(--movix-dark-gray);
+            margin-bottom: var(--movix-space-md);
+        }
+
+        .line-count {
+            display: inline-block;
+            background: var(--movix-primary-light);
+            color: var(--movix-white);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Cities Grid */
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--movix-space-lg);
+            margin-top: var(--movix-space-xl);
+        }
+
+        .city-card {
+            background: var(--movix-white);
+            border-radius: var(--movix-radius-lg);
+            padding: var(--movix-space-lg);
+            box-shadow: var(--movix-shadow-sm);
+            transition: all var(--movix-transition-base);
+        }
+
+        .city-card:hover {
+            box-shadow: var(--movix-shadow-md);
+        }
+
+        .city-card h3 {
+            color: var(--movix-primary);
+            font-size: 22px;
+            margin-bottom: var(--movix-space-sm);
+        }
+
+        .city-lines {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: var(--movix-space-md);
+        }
+
+        .line-badge {
+            background: var(--movix-primary);
+            color: var(--movix-white);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .line-badge.express {
+            background: var(--movix-accent);
+        }
+
+        /* Line Details */
+        .line-details {
+            background: var(--movix-white);
+            border-radius: var(--movix-radius-lg);
+            padding: var(--movix-space-xl);
+            margin-bottom: var(--movix-space-lg);
+            box-shadow: var(--movix-shadow-sm);
+        }
+
+        .line-header {
+            display: flex;
+            align-items: center;
+            gap: var(--movix-space-md);
+            margin-bottom: var(--movix-space-md);
+        }
+
+        .line-number {
+            background: var(--movix-primary);
+            color: var(--movix-white);
+            font-size: 28px;
+            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: var(--movix-radius-md);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .line-info h3 {
+            color: var(--movix-primary);
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .line-info p {
+            color: var(--movix-dark-gray);
+            font-size: 14px;
+        }
+
+        .frequency-tag {
+            background: var(--movix-light-gray);
+            color: var(--movix-dark-gray);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: var(--movix-space-sm);
+            margin-bottom: var(--movix-space-xl);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            background: var(--movix-white);
+            border: 2px solid var(--movix-gray);
+            color: var(--movix-dark-gray);
+            padding: 12px 24px;
+            border-radius: var(--movix-radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--movix-transition-base);
+        }
+
+        .tab.active {
+            background: var(--movix-primary);
+            border-color: var(--movix-primary);
+            color: var(--movix-white);
+        }
+
+        .tab:hover:not(.active) {
+            border-color: var(--movix-primary);
+            color: var(--movix-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--movix-space-lg);
+            margin-top: var(--movix-space-xl);
+        }
+
+        .feature-card {
+            background: var(--movix-white);
+            border-radius: var(--movix-radius-lg);
+            padding: var(--movix-space-xl);
+            text-align: center;
+            box-shadow: var(--movix-shadow-sm);
+        }
+
+        .feature-icon {
+            font-size: 56px;
+            margin-bottom: var(--movix-space-md);
+        }
+
+        .feature-card h3 {
+            color: var(--movix-primary);
+            font-size: 20px;
+            margin-bottom: var(--movix-space-sm);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--movix-primary-dark);
+            color: var(--movix-white);
+            padding: var(--movix-space-2xl) 0;
+            margin-top: var(--movix-space-3xl);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--movix-space-xl);
+            margin-bottom: var(--movix-space-xl);
+        }
+
+        footer h4 {
+            margin-bottom: var(--movix-space-md);
+            font-size: 18px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: var(--movix-space-sm);
+        }
+
+        footer a {
+            color: var(--movix-white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity var(--movix-transition-base);
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--movix-space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            h2 { font-size: 28px; }
+            nav ul { display: none; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Movix</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#netwerk">Lijnennetwerk</a></li>
+                <li><a href="#steden">Steden</a></li>
+                <li><a href="#innovatie">Innovatie</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="region">🚀 Een concept voor West-Brabant</div>
+            <h1>Welkom bij Movix</h1>
+            <p>De toekomst van openbaar vervoer komt eraan</p>
+            <p style="font-size: 16px; margin-top: 16px; opacity: 0.9;">
+                💡 Movix is momenteel in ontwikkeling. Ontdek ons concept voor modern, duurzaam vervoer door West-Brabant.
+            </p>
+            <a href="#netwerk" class="btn btn-accent">Ontdek het concept</a>
+            <a href="#contact" class="btn btn-outline">Interesse? Meld je aan</a>
+        </div>
+    </section>
+
+    <!-- Status Banner -->
+    <section style="background: linear-gradient(135deg, #FF6E40 0%, #FF9E80 100%); padding: 24px 0;">
+        <div class="container">
+            <div style="text-align: center; color: white;">
+                <h3 style="font-size: 24px; margin-bottom: 8px; font-weight: 600;">🚧 In ontwikkeling</h3>
+                <p style="font-size: 16px; opacity: 0.95;">
+                    Movix is momenteel een ambitieus concept voor moderne mobiliteit in West-Brabant. 
+                    We werken hard om dit werkelijkheid te maken!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section>
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Ons Concept in Cijfers</h2>
+            <p style="text-align: center; color: var(--movix-dark-gray); font-size: 16px; margin-bottom: 32px;">
+                Dit zijn onze ambities voor het Movix-netwerk
+            </p>
+            <div class="stats">
+                <div>
+                    <div class="stat-number">60+</div>
+                    <div class="stat-label">Geplande Buslijnen</div>
+                </div>
+                <div>
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Elektrische Bussen (gepland)</div>
+                </div>
+                <div>
+                    <div class="stat-number">150k+</div>
+                    <div class="stat-label">Verwachte Reizigers/dag</div>
+                </div>
+                <div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Elektrisch & Duurzaam</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Line Categories -->
+    <section id="netwerk" style="background: var(--movix-white); padding: 64px 0;">
+        <div class="container">
+            <h2>Ons Concept Lijnennetwerk</h2>
+            <p style="text-align: center; color: var(--movix-dark-gray); font-size: 18px; margin-bottom: 48px;">
+                Zo zal Movix heel West-Brabant verbinden met moderne, elektrische bussen
+            </p>
+
+            <div class="line-categories">
+                <div class="category-card">
+                    <div class="category-icon">🏙️</div>
+                    <h3>Stadslijnen</h3>
+                    <p>Verbindingen binnen steden naar alle wijken en voorzieningen</p>
+                    <span class="line-count">Lijnen 1-9 per stad</span>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🌍</div>
+                    <h3>Regiolijnen</h3>
+                    <p>Hoofdverbindingen tussen steden en dorpen in West-Brabant</p>
+                    <span class="line-count">Lijnen 101-210</span>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">⚡</div>
+                    <h3>Snellijnen</h3>
+                    <p>Express verbindingen tijdens spitsuren met beperkte haltes</p>
+                    <span class="line-count">Lijnen 501-503</span>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🌙</div>
+                    <h3>Nachtlijnen</h3>
+                    <p>Veilig thuiskomen tijdens de nacht in het weekend</p>
+                    <span class="line-count">Lijnen N1-N10</span>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🎉</div>
+                    <h3>Speciale Lijnen</h3>
+                    <p>Strand, evenementen en flexibele on-demand services</p>
+                    <span class="line-count">Lijnen 700-900</span>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🌐</div>
+                    <h3>Internationale Lijnen</h3>
+                    <p>Grensoverschrijdende verbindingen naar België</p>
+                    <span class="line-count">Lijnen 701-702</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities -->
+    <section id="steden">
+        <div class="container">
+            <h2>Geplande Steden & Knooppunten</h2>
+            <p style="text-align: center; color: var(--movix-dark-gray); font-size: 18px; margin-bottom: 32px;">
+                Deze steden worden straks verbonden door het Movix-netwerk
+            </p>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <h3>🏛️ Breda</h3>
+                    <p>Gepland als grootste knooppunt - 15+ lijnen</p>
+                    <div class="city-lines">
+                        <span class="line-badge">1</span>
+                        <span class="line-badge">2</span>
+                        <span class="line-badge">3</span>
+                        <span class="line-badge">4</span>
+                        <span class="line-badge">5</span>
+                        <span class="line-badge express">501</span>
+                        <span class="line-badge">101</span>
+                        <span class="line-badge">+8 meer</span>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <h3>🚉 Roosendaal</h3>
+                    <p>Gepland als centraal knooppunt - 12+ lijnen</p>
+                    <div class="city-lines">
+                        <span class="line-badge">1</span>
+                        <span class="line-badge">2</span>
+                        <span class="line-badge">3</span>
+                        <span class="line-badge">4</span>
+                        <span class="line-badge express">501</span>
+                        <span class="line-badge">101</span>
+                        <span class="line-badge">+6 meer</span>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <h3>🏰 Bergen op Zoom</h3>
+                    <p>Gepland als belangrijk knooppunt - 10+ lijnen</p>
+                    <div class="city-lines">
+                        <span class="line-badge">1</span>
+                        <span class="line-badge">2</span>
+                        <span class="line-badge">3</span>
+                        <span class="line-badge">4</span>
+                        <span class="line-badge express">501</span>
+                        <span class="line-badge">101</span>
+                        <span class="line-badge">+4 meer</span>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <h3>🌳 Etten-Leur</h3>
+                    <p>Regionaal knooppunt - 6 lijnen</p>
+                    <div class="city-lines">
+                        <span class="line-badge">1</span>
+                        <span class="line-badge">2</span>
+                        <span class="line-badge">101</span>
+                        <span class="line-badge">104</span>
+                        <span class="line-badge express">503</span>
+                        <span class="line-badge">205</span>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <h3>🏘️ Oosterhout</h3>
+                    <p>Regionaal knooppunt - 5 lijnen</p>
+                    <div class="city-lines">
+                        <span class="line-badge">1</span>
+                        <span class="line-badge">2</span>
+                        <span class="line-badge">102</span>
+                        <span class="line-badge">103</span>
+                        <span class="line-badge express">502</span>
+                    </div>
+                </div>
+
+                <div class="city-card">
+                    <h3>⚓ Moerdijk/Zevenbergen</h3>
+                    <p>Haven & industrie - 4 lijnen</p>
+                    <div class="city-lines">
+                        <span class="line-badge">103</span>
+                        <span class="line-badge">206</span>
+                        <span class="line-badge">25</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Lines -->
+    <section style="background: var(--movix-white);">
+        <div class="container">
+            <h2>Concept Lijnennetwerk</h2>
+            <p style="text-align: center; color: var(--movix-dark-gray); font-size: 16px; margin-bottom: 32px;">
+                Voorbeelden van hoe onze belangrijkste lijnen eruit zullen zien
+            </p>
+
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('hoofdlijnen')">Hoofdlijnen</button>
+                <button class="tab" onclick="showTab('express')">Express</button>
+                <button class="tab" onclick="showTab('nacht')">Nacht</button>
+            </div>
+
+            <div id="hoofdlijnen" class="tab-content active">
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number">101</div>
+                        <div class="line-info">
+                            <h3>Breda - Roosendaal - Bergen op Zoom</h3>
+                            <p>📍 Breda Station → Etten-Leur → Roosendaal Station → Bergen op Zoom Station</p>
+                            <span class="frequency-tag">⏱️ Elke 15 min (piek) • 30 min (dal)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number">102</div>
+                        <div class="line-info">
+                            <h3>Breda - Oosterhout - Dongen</h3>
+                            <p>📍 Breda Station → Oosterhout Station → Made → Dongen</p>
+                            <span class="frequency-tag">⏱️ Elke 30 minuten</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number">103</div>
+                        <div class="line-info">
+                            <h3>Roosendaal - Zevenbergen - Oosterhout</h3>
+                            <p>📍 Roosendaal → Oud Gastel → Zevenbergen → Oosterhout</p>
+                            <span class="frequency-tag">⏱️ Elk uur</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="express" class="tab-content">
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number" style="background: var(--movix-accent);">501</div>
+                        <div class="line-info">
+                            <h3>Breda Express</h3>
+                            <p>⚡ Breda Station ↔ Roosendaal Station ↔ Bergen op Zoom Station (non-stop)</p>
+                            <span class="frequency-tag" style="background: #FFE0D6; color: var(--movix-accent);">
+                                ⏱️ Elke 15 min (alleen spits 6:30-9:00, 16:00-19:00) • Reistijd: 35 min
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number" style="background: var(--movix-accent);">502</div>
+                        <div class="line-info">
+                            <h3>Oosterhout Express</h3>
+                            <p>⚡ Oosterhout → Breda (limited stops)</p>
+                            <span class="frequency-tag" style="background: #FFE0D6; color: var(--movix-accent);">
+                                ⏱️ Elke 30 min (alleen spitsuren)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number" style="background: var(--movix-accent);">503</div>
+                        <div class="line-info">
+                            <h3>Etten-Leur Express</h3>
+                            <p>⚡ Etten-Leur → Breda (direct)</p>
+                            <span class="frequency-tag" style="background: #FFE0D6; color: var(--movix-accent);">
+                                ⏱️ Elke 20 min (alleen spitsuren)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="nacht" class="tab-content">
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number" style="background: var(--movix-black);">N1</div>
+                        <div class="line-info">
+                            <h3>Breda Nacht</h3>
+                            <p>🌙 Station → Alle wijken circulair</p>
+                            <span class="frequency-tag">⏱️ Elk uur (vr/za 23:00-5:00)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number" style="background: var(--movix-black);">N2</div>
+                        <div class="line-info">
+                            <h3>Roosendaal Nacht</h3>
+                            <p>🌙 Station → Alle wijken circulair</p>
+                            <span class="frequency-tag">⏱️ Elk uur (vr/za 23:00-5:00)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line-details">
+                    <div class="line-header">
+                        <div class="line-number" style="background: var(--movix-black);">N10</div>
+                        <div class="line-info">
+                            <h3>Nachtlijn West-Brabant</h3>
+                            <p>🌙 Breda → Etten-Leur → Roosendaal → Bergen op Zoom</p>
+                            <span class="frequency-tag">⏱️ Elke 2 uur (vr/za nacht)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation -->
+    <section id="innovatie">
+        <div class="container">
+            <h2>Innovatie & Duurzaamheid</h2>
+            <p style="text-align: center; color: var(--movix-dark-gray); font-size: 18px; margin-bottom: 48px;">
+                Dit zijn de kernwaarden waarop Movix gebouwd wordt
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3>100% Elektrisch</h3>
+                    <p>Onze gehele geplande vloot van 250+ bussen zal volledig elektrisch rijden voor een schonere toekomst.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Real-time Tracking</h3>
+                    <p>In de toekomstige Movix app kun je je bus live volgen en weet je altijd precies wanneer je bus aankomt.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Contactloos Betalen</h3>
+                    <p>Straks betaal je eenvoudig met je bankpas, smartphone of Movix Card. Geen gedoe met losse kaartjes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚴</div>
+                    <h3>Bike-sharing</h3>
+                    <p>Bij alle stations wordt het straks mogelijk om eenvoudig een fiets te huren voor het laatste stuk.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>CO2-Neutraal</h3>
+                    <p>Elke toekomstige rit met Movix zal bijdragen aan een groenere wereld. Samen maken we het verschil.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📶</div>
+                    <h3>Gratis WiFi</h3>
+                    <p>In alle bussen komt gratis WiFi, zodat je onderweg kunt werken, studeren of ontspannen.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Toegankelijk</h3>
+                    <p>Alle bussen worden volledig toegankelijk voor rolstoelen, rollatoren en kinderwagens.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>On-Demand Service</h3>
+                    <p>In landelijke gebieden wordt het mogelijk om flexibel een busje te boeken via de app.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Lines -->
+    <section style="background: linear-gradient(135deg, #3F51B5 0%, #5C6BC0 100%); color: white; padding: 64px 0;">
+        <div class="container">
+            <h2 style="color: white;">Geplande Speciale Diensten</h2>
+            <p style="text-align: center; font-size: 18px; margin-bottom: 48px; opacity: 0.95;">
+                Naast ons reguliere netwerk willen we ook deze bijzondere diensten aanbieden
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+                    <div class="feature-icon">🏖️</div>
+                    <h3 style="color: white;">Beach Express (801)</h3>
+                    <p style="color: rgba(255,255,255,0.9);">In de zomer rechtstreeks naar de stranden van Zeeland. Elke zaterdag en zondag!</p>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+                    <div class="feature-icon">🎪</div>
+                    <h3 style="color: white;">Festival Lijn (802)</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Speciale diensten tijdens grote evenementen zoals Breda Jazz Festival en Vestrock.</p>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+                    <div class="feature-icon">🛍️</div>
+                    <h3 style="color: white;">Shopping Express (803)</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Elke zaterdag rechtstreeks naar Designer Outlet Roosendaal. Shop tot je erbij neervalt!</p>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+                    <div class="feature-icon">🚐</div>
+                    <h3 style="color: white;">Flex Service (900)</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Boek via de app een busje op maat in landelijke gebieden. Flexibel en altijd beschikbaar.</p>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+                    <div class="feature-icon">🇧🇪</div>
+                    <h3 style="color: white;">België Lijnen (701-702)</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Grensoverschrijdende verbindingen naar Wuustwezel, Essen en Turnhout.</p>
+                </div>
+
+                <div class="feature-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white;">
+                    <div class="feature-icon">🎓</div>
+                    <h3 style="color: white;">Scholieren Korting</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Studenten en scholieren reizen met 40% korting. Vooruitgang begint met bereikbaarheid!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Map Info -->
+    <section style="background: white;">
+        <div class="container">
+            <h2>Geplande Dekking West-Brabant</h2>
+            <p style="text-align: center; font-size: 18px; color: var(--movix-dark-gray); margin-bottom: 32px;">
+                Movix streeft ernaar om alle steden en dorpen in West-Brabant te verbinden
+            </p>
+
+            <div style="background: var(--movix-light-gray); border-radius: 16px; padding: 48px; margin-bottom: 32px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
+                    <div>
+                        <h4 style="color: var(--movix-primary); font-size: 20px; margin-bottom: 8px;">Steden (6)</h4>
+                        <p style="color: var(--movix-dark-gray); font-size: 14px;">Breda, Roosendaal, Bergen op Zoom, Etten-Leur, Oosterhout, Zevenbergen</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--movix-primary); font-size: 20px; margin-bottom: 8px;">Dorpen (40+)</h4>
+                        <p style="color: var(--movix-dark-gray); font-size: 14px;">Wouw, Nispen, Halsteren, Rucphen, Prinsenbeek, Bavel, en vele meer</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--movix-primary); font-size: 20px; margin-bottom: 8px;">Oppervlakte</h4>
+                        <p style="color: var(--movix-dark-gray); font-size: 14px;">800+ km² gepland gedekt met OV</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--movix-primary); font-size: 20px; margin-bottom: 8px;">Haltes</h4>
+                        <p style="color: var(--movix-dark-gray); font-size: 14px;">500+ geplande haltes strategisch geplaatst</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--movix-primary); color: white; border-radius: 16px; padding: 48px; text-align: center;">
+                <h3 style="font-size: 32px; margin-bottom: 16px;">🗺️ Concept Routeplanner</h3>
+                <p style="font-size: 18px; margin-bottom: 32px; opacity: 0.95;">Zo zal de Movix routeplanner er in de toekomst uitzien</p>
+                <a href="#contact" class="btn btn-accent" style="display: inline-block;">Interesse? Meld je aan</a>
+                <a href="#" class="btn btn-outline" style="display: inline-block; margin-left: 16px;">Bekijk Concept PDF</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section>
+        <div class="container">
+            <div style="background: white; border-radius: 16px; padding: 64px 32px; text-align: center; box-shadow: var(--movix-shadow-md);">
+                <h2>Geïnteresseerd in Movix?</h2>
+                <p style="font-size: 20px; color: var(--movix-dark-gray); margin-bottom: 32px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Meld je aan voor updates over de ontwikkeling van Movix en wees de eerste die hoort wanneer we van start gaan!
+                </p>
+                <div style="max-width: 500px; margin: 0 auto 32px;">
+                    <input type="email" placeholder="Jouw e-mailadres" style="width: 100%; padding: 16px; border: 2px solid var(--movix-gray); border-radius: 8px; font-size: 16px; margin-bottom: 16px;">
+                    <button class="btn btn-accent" style="width: 100%;">📬 Houd me op de hoogte</button>
+                </div>
+                <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--movix-gray);">
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--movix-primary); margin-bottom: 4px;">🚀</div>
+                        <div style="font-size: 14px; color: var(--movix-dark-gray);">Concept in ontwikkeling</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--movix-primary); margin-bottom: 4px;">💚</div>
+                        <div style="font-size: 14px; color: var(--movix-dark-gray);">100% duurzaam</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--movix-primary); margin-bottom: 4px;">🌍</div>
+                        <div style="font-size: 14px; color: var(--movix-dark-gray);">Voor heel West-Brabant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Movix West-Brabant</h4>
+                    <p style="opacity: 0.8; line-height: 1.6; margin-top: 8px;">
+                        Een ambitieus concept voor modern, duurzaam openbaar vervoer in West-Brabant. Momenteel in ontwikkeling.
+                    </p>
+                    <p style="opacity: 0.7; font-size: 14px; margin-top: 12px;">
+                        🚧 Status: Conceptfase
+                    </p>
+                </div>
+                
+                <div>
+                    <h4>Diensten (Concept)</h4>
+                    <ul>
+                        <li><a href="#">Concept Routeplanner</a></li>
+                        <li><a href="#">Geplande Dienstregeling</a></li>
+                        <li><a href="#">Concept Lijnenkaart</a></li>
+                        <li><a href="#">Toekomstige Tarieven</a></li>
+                        <li><a href="#">Over de Movix Card</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Reisinformatie</h4>
+                    <ul>
+                        <li><a href="#">Verstoringen & Werkzaamheden</a></li>
+                        <li><a href="#">Actuele Reistijden</a></li>
+                        <li><a href="#">OV-chipkaart</a></li>
+                        <li><a href="#">Reizen met Fiets</a></li>
+                        <li><a href="#">Toegankelijkheid</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Over Movix</h4>
+                    <ul>
+                        <li><a href="#">Wie zijn wij</a></li>
+                        <li><a href="#">Vacatures</a></li>
+                        <li><a href="#">Duurzaamheid</a></li>
+                        <li><a href="#">Pers & Media</a></li>
+                        <li><a href="#">Partnerships</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Contact & Interesse</h4>
+                    <ul>
+                        <li><a href="#">📧 info@movix-concept.nl</a></li>
+                        <li><a href="#">💬 Stel een vraag</a></li>
+                        <li><a href="#">📝 Interesse aanmelden</a></li>
+                        <li><a href="#">🤝 Partnerships & Investeren</a></li>
+                        <li><a href="#">📰 Pers & Media Kit</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Volg Ons</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter (X)</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Movix West-Brabant. Alle rechten voorbehouden.</p>
+                <p style="margin-top: 8px;">
+                    <a href="#" style="margin: 0 12px;">Privacybeleid</a> | 
+                    <a href="#" style="margin: 0 12px;">Algemene Voorwaarden</a> | 
+                    <a href="#" style="margin: 0 12px;">Cookie Beleid</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
