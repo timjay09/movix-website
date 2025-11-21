@@ -6,6 +6,7 @@
     <title>Movix - Modern Openbaar Vervoer</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+        
         :root {
           --movix-primary: #3F51B5;
           --movix-primary-light: #5C6BC0;
@@ -46,7 +47,6 @@
             line-height: 1.6;
         }
 
-        /* Navigation */
         nav {
             background-color: var(--movix-white);
             padding: var(--movix-space-lg);
@@ -88,7 +88,6 @@
             color: var(--movix-primary);
         }
 
-        /* Hero */
         .hero {
             background: linear-gradient(135deg, #3F51B5 0%, #5C6BC0 100%);
             color: var(--movix-white);
@@ -154,7 +153,6 @@
             color: var(--movix-primary);
         }
 
-        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -172,7 +170,6 @@
             text-align: center;
         }
 
-        /* Stats */
         .stats {
             background: var(--movix-white);
             padding: var(--movix-space-2xl);
@@ -197,7 +194,6 @@
             font-size: 16px;
         }
 
-        /* Line Categories */
         .line-categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -245,7 +241,6 @@
             font-weight: 600;
         }
 
-        /* Cities Grid */
         .cities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -259,10 +254,12 @@
             padding: var(--movix-space-lg);
             box-shadow: var(--movix-shadow-sm);
             transition: all var(--movix-transition-base);
+            cursor: pointer;
         }
 
         .city-card:hover {
             box-shadow: var(--movix-shadow-md);
+            transform: translateY(-4px);
         }
 
         .city-card h3 {
@@ -291,7 +288,6 @@
             background: var(--movix-accent);
         }
 
-        /* Line Details */
         .line-details {
             background: var(--movix-white);
             border-radius: var(--movix-radius-lg);
@@ -340,7 +336,6 @@
             margin-top: 8px;
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: var(--movix-space-sm);
@@ -379,7 +374,6 @@
             display: block;
         }
 
-        /* Features */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -406,7 +400,6 @@
             margin-bottom: var(--movix-space-sm);
         }
 
-        /* Footer */
         footer {
             background-color: var(--movix-primary-dark);
             color: var(--movix-white);
@@ -452,6 +445,101 @@
             opacity: 0.7;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--movix-light-gray);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--movix-dark-gray);
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--movix-primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-line-card {
+            background: var(--movix-light-gray);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+
+        .modal-line-card:hover {
+            background: var(--movix-primary);
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .modal-line-number {
+            background: var(--movix-primary);
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 8px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .modal-line-card:hover .modal-line-number {
+            background: white;
+            color: var(--movix-primary);
+        }
+
+        .modal-line-number.express {
+            background: var(--movix-accent);
+        }
+
+        .modal-line-card:hover .modal-line-number.express {
+            background: white;
+            color: var(--movix-accent);
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             h2 { font-size: 28px; }
@@ -461,7 +549,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="container">
             <div class="logo">Movix</div>
@@ -475,7 +562,6 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero" id="home">
         <div class="container">
             <div class="region">🚀 Een concept voor West-Brabant</div>
@@ -489,7 +575,6 @@
         </div>
     </section>
 
-    <!-- Status Banner -->
     <section style="background: linear-gradient(135deg, #FF6E40 0%, #FF9E80 100%); padding: 24px 0;">
         <div class="container">
             <div style="text-align: center; color: white;">
@@ -502,7 +587,6 @@
         </div>
     </section>
 
-    <!-- Stats -->
     <section>
         <div class="container">
             <h2 style="margin-bottom: 16px;">Ons Concept in Cijfers</h2>
@@ -530,7 +614,6 @@
         </div>
     </section>
 
-    <!-- Line Categories -->
     <section id="netwerk" style="background: var(--movix-white); padding: 64px 0;">
         <div class="container">
             <h2>Ons Concept Lijnennetwerk</h2>
@@ -584,16 +667,15 @@
         </div>
     </section>
 
-    <!-- Cities -->
     <section id="steden">
         <div class="container">
             <h2>Geplande Steden & Knooppunten</h2>
             <p style="text-align: center; color: var(--movix-dark-gray); font-size: 18px; margin-bottom: 32px;">
-                Deze steden worden straks verbonden door het Movix-netwerk
+                Klik op een stad om alle buslijnen te bekijken
             </p>
             
             <div class="cities-grid">
-                <div class="city-card">
+                <div class="city-card" onclick="showCityModal('Breda')">
                     <h3>🏛️ Breda</h3>
                     <p>Gepland als grootste knooppunt - 15+ lijnen</p>
                     <div class="city-lines">
@@ -608,7 +690,7 @@
                     </div>
                 </div>
 
-                <div class="city-card">
+                <div class="city-card" onclick="showCityModal('Roosendaal')">
                     <h3>🚉 Roosendaal</h3>
                     <p>Gepland als centraal knooppunt - 12+ lijnen</p>
                     <div class="city-lines">
@@ -622,7 +704,7 @@
                     </div>
                 </div>
 
-                <div class="city-card">
+                <div class="city-card" onclick="showCityModal('Bergen op Zoom')">
                     <h3>🏰 Bergen op Zoom</h3>
                     <p>Gepland als belangrijk knooppunt - 10+ lijnen</p>
                     <div class="city-lines">
@@ -636,7 +718,7 @@
                     </div>
                 </div>
 
-                <div class="city-card">
+                <div class="city-card" onclick="showCityModal('Etten-Leur')">
                     <h3>🌳 Etten-Leur</h3>
                     <p>Regionaal knooppunt - 6 lijnen</p>
                     <div class="city-lines">
@@ -649,7 +731,7 @@
                     </div>
                 </div>
 
-                <div class="city-card">
+                <div class="city-card" onclick="showCityModal('Oosterhout')">
                     <h3>🏘️ Oosterhout</h3>
                     <p>Regionaal knooppunt - 5 lijnen</p>
                     <div class="city-lines">
@@ -661,9 +743,9 @@
                     </div>
                 </div>
 
-                <div class="city-card">
+                <div class="city-card" onclick="showCityModal('Moerdijk/Zevenbergen')">
                     <h3>⚓ Moerdijk/Zevenbergen</h3>
-                    <p>Haven & industrie - 4 lijnen</p>
+                    <p>Haven & industrie - 3 lijnen</p>
                     <div class="city-lines">
                         <span class="line-badge">103</span>
                         <span class="line-badge">206</span>
@@ -673,6 +755,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div id="cityModal" class="modal" onclick="if(event.target.id==='cityModal') closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
     <!-- Key Lines -->
     <section style="background: var(--movix-white);">
@@ -908,7 +998,7 @@
         </div>
     </section>
 
-    <!-- Coverage Map Info -->
+    <!-- Coverage -->
     <section style="background: white;">
         <div class="container">
             <h2>Geplande Dekking West-Brabant</h2>
@@ -946,7 +1036,7 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- CTA -->
     <section>
         <div class="container">
             <div style="background: white; border-radius: 16px; padding: 64px 32px; text-align: center; box-shadow: var(--movix-shadow-md);">
@@ -955,7 +1045,7 @@
                     Meld je aan voor updates over de ontwikkeling van Movix en wees de eerste die hoort wanneer we van start gaan!
                 </p>
                 <div style="max-width: 500px; margin: 0 auto 32px;">
-                    <input type="email" placeholder="Jouw e-mailadres" style="width: 100%; padding: 16px; border: 2px solid var(--movix-gray); border-radius: 8px; font-size: 16px; margin-bottom: 16px;">
+                    <input type="email" placeholder="Jouw e-mailadres" style="width: 100%; padding: 16px; border: 2px solid var(--movix-gray); border-radius: 8px; font-size: 16px; margin-bottom: 16px; font-family: inherit;">
                     <button class="btn btn-accent" style="width: 100%;">📬 Houd me op de hoogte</button>
                 </div>
                 <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--movix-gray);">
@@ -976,7 +1066,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="container">
             <div class="footer-grid">
@@ -997,21 +1086,9 @@
                         <li><a href="#">Geplande Dienstregeling</a></li>
                         <li><a href="#">Concept Lijnenkaart</a></li>
                         <li><a href="#">Toekomstige Tarieven</a></li>
-                        <li><a href="#">Over de Movix Card</a></li>
                     </ul>
                 </div>
                 
-                <div>
-                    <h4>Reisinformatie</h4>
-                    <ul>
-                        <li><a href="#">Verstoringen & Werkzaamheden</a></li>
-                        <li><a href="#">Actuele Reistijden</a></li>
-                        <li><a href="#">OV-chipkaart</a></li>
-                        <li><a href="#">Reizen met Fiets</a></li>
-                        <li><a href="#">Toegankelijkheid</a></li>
-                    </ul>
-                </div>
-
                 <div>
                     <h4>Over Movix</h4>
                     <ul>
@@ -1019,29 +1096,16 @@
                         <li><a href="#">Vacatures</a></li>
                         <li><a href="#">Duurzaamheid</a></li>
                         <li><a href="#">Pers & Media</a></li>
-                        <li><a href="#">Partnerships</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4>Contact & Interesse</h4>
+                    <h4>Contact</h4>
                     <ul>
                         <li><a href="#">📧 info@movix-concept.nl</a></li>
                         <li><a href="#">💬 Stel een vraag</a></li>
                         <li><a href="#">📝 Interesse aanmelden</a></li>
-                        <li><a href="#">🤝 Partnerships & Investeren</a></li>
-                        <li><a href="#">📰 Pers & Media Kit</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4>Volg Ons</h4>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter (X)</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">🤝 Partnerships</a></li>
                     </ul>
                 </div>
             </div>
@@ -1050,8 +1114,7 @@
                 <p>&copy; 2024 Movix West-Brabant. Alle rechten voorbehouden.</p>
                 <p style="margin-top: 8px;">
                     <a href="#" style="margin: 0 12px;">Privacybeleid</a> | 
-                    <a href="#" style="margin: 0 12px;">Algemene Voorwaarden</a> | 
-                    <a href="#" style="margin: 0 12px;">Cookie Beleid</a>
+                    <a href="#" style="margin: 0 12px;">Algemene Voorwaarden</a>
                 </p>
             </div>
         </div>
@@ -1059,24 +1122,106 @@
 
     <script>
         function showTab(tabName) {
-            // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Remove active class from all tabs
+            contents.forEach(content => content.classList.remove('active'));
             const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Show selected tab content
+            tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
-
-            // Add active class to clicked tab
             event.target.classList.add('active');
         }
+
+        const cityLines = {
+            'Breda': [
+                { number: '1', route: 'Station - Centrum - Chassé', frequency: 'Elke 10 min' },
+                { number: '2', route: 'Heusdenhout - Station - Princenhage', frequency: 'Elke 15 min' },
+                { number: '3', route: 'Bavel - Station - Haagse Beemden', frequency: 'Elke 20 min' },
+                { number: '101', route: 'Breda - Etten-Leur - Roosendaal - Bergen op Zoom', frequency: 'Elke 15 min' },
+                { number: '501', route: 'Breda Express (non-stop)', frequency: 'Elke 15 min (spits)' }
+            ],
+            'Roosendaal': [
+                { number: '1', route: 'Kortendijk - Station - Designer Outlet', frequency: 'Elke 15 min' },
+                { number: '2', route: 'Tolberg - Station - Weihoek', frequency: 'Elke 20 min' },
+                { number: '3', route: 'Kroeven - Station - Westrand', frequency: 'Elke 30 min' },
+                { number: '4', route: 'Ringbus (circulair)', frequency: 'Elk uur' },
+                { number: '101', route: 'Roosendaal - Bergen op Zoom', frequency: 'Elke 15 min' },
+                { number: '501', route: 'Roosendaal Express', frequency: 'Elke 15 min (spits)' },
+                { number: '803', route: 'Shopping Express naar Designer Outlet', frequency: 'Elke 15 min (za)' }
+            ],
+            'Bergen op Zoom': [
+                { number: '1', route: 'Station - Centrum - De Zoom', frequency: 'Elke 15 min' },
+                { number: '2', route: 'Lepelstraat - Station - Borgvliet', frequency: 'Elke 20 min' },
+                { number: '3', route: 'Centrum - Wouwse Plantage - De Blaak', frequency: 'Elke 30 min' },
+                { number: '4', route: 'Ringbus Bergen op Zoom', frequency: 'Elk uur' },
+                { number: '101', route: 'Bergen op Zoom - Roosendaal - Breda', frequency: 'Elke 15 min' },
+                { number: '501', route: 'Bergen op Zoom Express', frequency: 'Elke 15 min (spits)' }
+            ],
+            'Etten-Leur': [
+                { number: '1', route: 'Station - Centrum - Hoeven', frequency: 'Elke 30 min' },
+                { number: '2', route: 'Etten - Station - Leur Oost', frequency: 'Elke 30 min' },
+                { number: '101', route: 'Etten-Leur - Roosendaal - Bergen op Zoom', frequency: 'Elke 30 min' },
+                { number: '104', route: 'Etten-Leur - Nispen - Roosendaal', frequency: 'Elke 30 min' },
+                { number: '503', route: 'Etten-Leur Express naar Breda', frequency: 'Elke 20 min (spits)' }
+            ],
+            'Oosterhout': [
+                { number: '1', route: 'Station - Centrum - Dorst', frequency: 'Elke 30 min' },
+                { number: '2', route: 'Den Hout - Station - Oosterheide', frequency: 'Elke 30 min' },
+                { number: '102', route: 'Oosterhout - Breda', frequency: 'Elke 30 min' },
+                { number: '103', route: 'Oosterhout - Zevenbergen - Roosendaal', frequency: 'Elk uur' },
+                { number: '502', route: 'Oosterhout Express naar Breda', frequency: 'Elke 30 min (spits)' }
+            ],
+            'Moerdijk/Zevenbergen': [
+                { number: '103', route: 'Zevenbergen - Roosendaal', frequency: 'Elk uur' },
+                { number: '206', route: 'Zevenbergen - Moerdijk - Willemstad - Fijnaart', frequency: 'Elk uur' },
+                { number: '25', route: 'Roosendaal Ziekenhuis - Moerdijk (haven)', frequency: 'Elk uur' }
+            ]
+        };
+
+        function showCityModal(cityName) {
+            const modal = document.getElementById('cityModal');
+            const modalContent = document.getElementById('modalContent');
+            const lines = cityLines[cityName] || [];
+            
+            let html = `
+                <h2 style="color: #3F51B5; font-size: 36px; margin-bottom: 12px; font-weight: 700;">
+                    ${cityName}
+                </h2>
+                <p style="color: #424242; font-size: 18px; margin-bottom: 32px;">
+                    ${lines.length} buslijnen gepland voor dit knooppunt
+                </p>
+            `;
+            
+            lines.forEach(line => {
+                const isExpress = line.number.startsWith('5');
+                const numberClass = isExpress ? 'express' : '';
+                
+                html += `
+                    <div class="modal-line-card">
+                        <div class="modal-line-number ${numberClass}">${line.number}</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 18px; font-weight: 700; color: #424242; margin-bottom: 4px;">
+                                ${line.route}
+                            </div>
+                            <div style="font-size: 14px; color: #9E9E9E;">
+                                ⏱️ ${line.frequency}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            modalContent.innerHTML = html;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('cityModal').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
